@@ -47,9 +47,13 @@ export default function Productos() {
           <img src={producto.avatar} alt={producto.nombre} width="150" height={"150"} />
           <br />
           <div>
-            <Link to={`/productos/${producto.id}`} state={{producto}}><Boton texto={"Mas Info"} color='green'>Más detalles</Boton></Link>
+            
+            <Link to={`/productos/${producto.categoria || 'sin-categoria'}/${producto.id}`} state={{producto}}><Boton texto={"Mas Info"} color='green'>Más detalles</Boton></Link>
 
-            <button onClick={() => agregarAlCarrito(producto)}>Comprar</button>
+            <button onClick={() => agregarAlCarrito(producto)} 
+                    style={{ backgroundColor: 'red', color: 'white', borderRadius: '5px', 
+                             margin: '4px', padding: '10px 20px', border: 'none',
+                             cursor: 'pointer'}}>Comprar</button>
         
           </div>
         </li>

@@ -1,8 +1,16 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function CarritoCompras({ carrito, setCarrito }) {
+  const navigate = useNavigate();
+
   const vaciarCarrito = () => {
     setCarrito([]);
+  };
+
+  const irAPagar = () => {
+    navigate("/pagar", { state: { carrito } });
   };
 
   const quitarCantidad = (idProducto) => {
@@ -60,9 +68,8 @@ export default function CarritoCompras({ carrito, setCarrito }) {
             <hr />
             Total: ${Number(total).toFixed(3)}
           </div>
-          <button onClick={vaciarCarrito}>
-            Vaciar Carrito
-          </button>
+          <button onClick={vaciarCarrito}> Vaciar Carrito</button>
+          <button onClick={irAPagar}>Pagar</button>
         </>
       )}
     </div>
