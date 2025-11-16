@@ -1,5 +1,4 @@
 import { Link, useParams, useLocation } from "react-router-dom";
-import CarritoCompras from "./Carrito";
 
 const ProductoDetalle = () => {
  
@@ -31,7 +30,6 @@ if (!producto) {
         </li>
         <hr />
         <Link to={`/productos`}><button>Volver</button></Link>
-        
     </ul>
     </>
   );

@@ -1,34 +1,21 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuthContext } from '../context/AuthContext';
+import { useCartContext } from '../context/CartContext';
 
-export default function Pagar({
-  isAuthenticated,
-  setIsAuthenticated,
-  usuario,
-  setUsuario,
-}) {
+export default function Pagar() {
   const location = useLocation();
+
+  const { usuario, cerrarSesion } = useAuthContext();
+  const { carrito, total, vaciarCarrito } = useCartContext();
   const navigate = useNavigate();
 
-  // Datos del carrito
-  const carrito = location.state?.carrito || [];
-  // Calculo del total
-  const total = carrito.reduce(
-    (suma, producto) => suma + Number(producto.precio),
-    0
-  );
-
-  console.log("estoy aca!");
+  const tokenActual = localStorage.getItem('authToken');
 
   // Función para finalizar compra
   const comprar = () => {
     alert("¡Compra realizada con éxito!");
+    vaciarCarrito(); // Limpiar carrito después de comprar
     navigate("/productos");
-  };
-
-  // Función para cerrar sesión
-  const cerrarSesion = () => {
-    setIsAuthenticated(false);
-    setUsuario({ nombre: "", email: "" });
   };
 
   return (

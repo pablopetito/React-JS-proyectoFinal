@@ -2,8 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import Boton from '../componentes/Boton';
+import { useAuthContext } from '../context/AuthContext';
+import { useCartContext } from '../context/CartContext';
 
 function NavBar() {
+
+  const { usuario, isAuthenticated, cerrarSesion } = useAuthContext();
+  const { carrito } = useCartContext();
+
   const [isOpen, setIsOpen] = useState(false);  // ← Esta línea es CRUCIAL
 
   const toggleMenu = () => {
@@ -45,9 +51,30 @@ function NavBar() {
             <Link to="/sobreMi">Sobre Mi</Link>
             
           </li>
-          <li className="navbar-item">
-            <Boton texto="Contacto" color="White" colorTex='Black'></Boton>
-          </li>
+
+          {/* ENLACE PARA ADMIN - Solo visible para admin */}
+            {usuario?.nombre === "admin" && (
+              <li>
+                <Link to="/agregar-producto">Agregar Producto</Link>
+              </li>
+            )}
+          
+          <li >
+            {isAuthenticated ? (
+              <div >
+                <span>Hola, {usuario.nombre}</span>
+                <span>Carrito: ({carrito.length})</span>
+                <button
+                  onClick={cerrarSesion}
+                >
+                  Cerrar Sesión
+                </button>
+              </div>
+            ) : (
+              <Link to="/iniciar-sesion">Iniciar Sesión</Link>
+            )}
+          </li>    
+
         </ul>
         </div>
           <h3></h3> 

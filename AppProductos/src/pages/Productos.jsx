@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Boton from '../componentes/Boton';
-import CarritoCompras from './Carrito';
+
+import CarritoCompras from "./Carrito";
+import { useCartContext } from "../context/CartContext";
 
 export default function Productos() {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [carrito, setCarrito] = useState([]);
+
+   // Contexto para el carrito
+  const { agregarAlCarrito } = useCartContext();
 
 // https://68d4830d214be68f8c696bfb.mockapi.io/api/articulos
 // https://68d482e3214be68f8c696ae2.mockapi.io/api/productos
@@ -24,11 +29,6 @@ export default function Productos() {
         setCargando(false);
       });
   }, []);
-
-  const agregarAlCarrito = (producto) => {
-    setCarrito([...carrito, producto]);
-    alert(`Producto ${producto.nombre} agregado al carrito`);
-  }
 
   if (cargando) return <p>Cargando productos...</p>;
   if (error) return <p>{error}</p>;
