@@ -64,9 +64,10 @@ export default function IniciarSesion() {
           }
           required
         />
-        <button type="submit">Iniciar Sesión</button>
+        <button style={{ backgroundColor: "green", color: "White" }} type="submit">Iniciar Sesión</button>
         <strong> </strong>
-        <button type="button" onClick={() => navigate("/productos")}>
+        <button  style={{ backgroundColor: "red", color: "White" }}
+          type="button" onClick={() => navigate("/productos")}>
           Cancelar
         </button>
       </form>
