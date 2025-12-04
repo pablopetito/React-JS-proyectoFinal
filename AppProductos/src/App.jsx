@@ -31,6 +31,7 @@ return (
   <div>
     <AuthProvider>
       <CartProvider>
+      <ProductsProvider>
       <NavBar />
       <Routes>
         <Route path="/" element={<Inicio />} />
@@ -55,6 +56,7 @@ return (
 
       </Routes>
       <Pie />
+      </ProductsProvider>
       </ CartProvider>
       </ AuthProvider>
   </div>
